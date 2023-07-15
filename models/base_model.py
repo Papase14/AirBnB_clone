@@ -6,13 +6,14 @@
 import uuid
 from datetime import datetime
 
+
 class BaseModel:
     """
         A base class for all hbnb models
     """
     def __init__(self):
         """
-            Assign a unique ID to each instance using uuid.uuid4() and convert it to a string
+            Assign a unique ID to each instance using and converts to string
         """
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
