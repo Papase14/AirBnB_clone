@@ -7,6 +7,7 @@ import uuid
 from datetime import datetime
 import models
 
+
 class BaseModel:
     """
         A base class for all hbnb models
@@ -20,8 +21,9 @@ class BaseModel:
         self.updated_at = self.created_at
 
     def __str__(self):
-        """Returns string rep""" 
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        """Returns string rep"""
+        f = self.__class__.__name__
+        return "[{}] ({}) {}".format(f, self.id, self.__dict__)
 
     def save(self):
         """updates instance"""
