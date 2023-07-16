@@ -21,14 +21,14 @@ class HBNBCommand(cmd.Cmd):
     classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
-    def do_EOF(self, line):
+    def do_EOF(self, arg):
         """
             Exit on Ctrl-D
         """
         print()
         return True
 
-    def do_quit(self, line):
+    def do_quit(self, arg):
         """
             Exit on quit
         """
