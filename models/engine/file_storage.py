@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 """
-file_storage module that contains the FileStorage class
-definition and methods
+    file_storage module that contains the FileStorage class
+    definition and methods
 """
+
 from models.base_model import BaseModel
 import json
-import os
-import models
 from models.city import City
 from models.place import Place
 from models.review import Review
@@ -14,13 +13,11 @@ from models.state import State
 from models.user import User
 from models.amenity import Amenity
 
-
 class FileStorage:
     """
     FileStorage class which serializes instances to a JSON file
     and deserializes JSON files to instances.
     """
-
     __file_path = 'file.json'
     __objects = {}
 
@@ -51,8 +48,16 @@ class FileStorage:
         Deserializes the JSON file to `__objects` if the file exists;
         otherwise, does nothing.
         """
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, 'r', encoding='utf-8') as f:
-                LoadDict = json.loads(f.read())
-            for key, val in LoadDict.items():
-                self.__objects[key] = eval(val["__class__"])(**val)
+        classes = {
+                    'BaseModel': BaseModel, 'User': User, 'Place': Place,
+                    'State': State, 'City': City, 'Amenity': Amenity,
+                    'Review': Review
+                  }
+        try:
+            temp = {}
+            with open(self.__file_path, 'r') as f:
+                temp = json.load(f)
+                for key, val in temp.items():
+                        self.all()[key] = classes[val['__class__']](**val)
+        except FileNotFoundError:
+            pass
