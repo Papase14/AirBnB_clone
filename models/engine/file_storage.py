@@ -37,11 +37,12 @@ class FileStorage:
         """
         Serializes `__objects` to the JSON file.
         """
-        ObjectDict = {}
-        for key, value in self.__objects.items():
-            ObjectDict[key] = value.to_dict()
-        with open(self.__file_path, 'w', encoding='utf=8') as f:
-            f.write(json.dumps(ObjectDict))
+        with open(self.__file_path, '+w') as f:
+            ObjectDict = {}
+            ObjectDict.update(self.__objects)
+            for key, val in ObjectDict.items():
+                ObjectDict[key] = val.to_dict()
+            json.dump(ObjectDict, f)
 
     def reload(self):
         """
@@ -54,10 +55,10 @@ class FileStorage:
                     'Review': Review
                   }
         try:
-            temp = {}
             with open(self.__file_path, 'r') as f:
-                temp = json.load(f)
-                for key, val in temp.items():
+                ObjectDict = {}
+                ObjectDict = json.load(f)
+                for key, val in ObjectDict.items():
                         self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
