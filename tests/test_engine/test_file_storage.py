@@ -60,14 +60,14 @@ class File_Storage_Tests(unittest.TestCase):
         Tests functionality of the save() method
         of the FileStorage class.
         """
-        pass # FIXME:
+        pass
 
     def test_reload(self):
         """
         Tests functionality of the reload() method
         of the FileStorage class.
         """
-        pass # FIXME:
+        pass
 
 
 if __name__ == '__name__':
