@@ -5,7 +5,7 @@ from models.place import Place
 
 class Place_Test(unittest.TestCase):
     """class for Place_Test"""
-     @classmethod
+    @classmethod
     def setUp(cls):
         """
         Method to set up Place classes for use during testing.

@@ -6,7 +6,7 @@ from models.review import Review
 
 class Review_Test(unittest.TestCase):
     """Review_test class"""
-     @classmethod
+    @classmethod
     def setUp(cls):
         """
         Method to set up Review classes for use during testing.
