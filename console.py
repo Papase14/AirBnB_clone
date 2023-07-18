@@ -17,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
     """
         Entry to command interpreter
     """
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
     classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
@@ -100,19 +100,15 @@ class HBNBCommand(cmd.Cmd):
         """
             Print all objects or all objects of specified class
         """
-        args = parse(arg)
-        obj_list = []
-        if len(arg) == 0:
-            for objs in storage.all().values():
-                obj_list.append(objs)
-            print(obj_list)
-        elif args[0] in HBNBCommand.classes:
-            for key, objs in storage.all().items():
-                if args[0] in key:
-                    obj_list.append(objs)
-            print(obj_list)
+        if not arg:
+            print([str(value) for value in storage.all().values()])
         else:
-            print("** class doesn't exist **")
+            class_name = arg.split()[0]
+            if class_name not in storage.all_classes():
+                print("** class doesn't exist **")
+            else:
+                class_instances = storage.all_classes()[class_name]
+                print([str(instance) for instance in class_instances])
 
     def do_update(self, arg):
         """
@@ -209,4 +205,5 @@ def parse(arg):
     return tuple(arg.split())
 
 if __name__ == "__main__":
+    storage.reload()
     HBNBCommand().cmdloop()

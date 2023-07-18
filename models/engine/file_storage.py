@@ -43,6 +43,19 @@ class FileStorage:
             for key, val in ObjectDict.items():
                 ObjectDict[key] = val.to_dict()
             json.dump(ObjectDict, f)
+    
+    def all_classes(self):
+        """
+        Returns a dictionary where each key is a class name
+        and the value is a list of instances.
+        """
+        classes = {}
+        for key, obj in self.__objects.items():
+            class_name = key.split('.')[0]
+            if class_name not in classes:
+                classes[class_name] = []
+            classes[class_name].append(obj)
+        return classes
 
     def reload(self):
         """
