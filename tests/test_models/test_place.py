@@ -3,6 +3,7 @@
 import unittest
 from models.place import Place
 
+
 class Place_Test(unittest.TestCase):
     """class for Place_Test"""
     @classmethod
