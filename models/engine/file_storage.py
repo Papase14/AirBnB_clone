@@ -13,6 +13,7 @@ from models.state import State
 from models.user import User
 from models.amenity import Amenity
 
+
 class FileStorage:
     """
     FileStorage class which serializes instances to a JSON file
@@ -43,7 +44,7 @@ class FileStorage:
             for key, val in ObjectDict.items():
                 ObjectDict[key] = val.to_dict()
             json.dump(ObjectDict, f)
-    
+
     def all_classes(self):
         """
         Returns a dictionary where each key is a class name
@@ -72,6 +73,6 @@ class FileStorage:
                 ObjectDict = {}
                 ObjectDict = json.load(f)
                 for key, val in ObjectDict.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
