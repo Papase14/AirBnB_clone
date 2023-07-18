@@ -5,6 +5,7 @@
 
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """
         A place to stay
