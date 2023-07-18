@@ -7,10 +7,9 @@ from models.engine.file_storage import FileStorage as FileStorage
 from models.base_model import BaseModel as BaseModel
 
 
-class FileStorageTests(unittest.TestCase):
+class File_Storage_Tests(unittest.TestCase):
     """
-    Class FileStorageTests that provides unit testing for the
-    `FileStorage` class.
+    Class FileStorageTests
     """
     def setUp(cls):
         """

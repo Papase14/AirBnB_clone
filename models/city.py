@@ -2,12 +2,10 @@
 """
     City Module for HBNB project
 """
-
 from models.base_model import BaseModel
 
 class City(BaseModel):
-    """
-        The city class, contains state ID and name
+    """City Class
     """
     state_id = ""
     name = ""

@@ -8,7 +8,7 @@ from models.base_model import BaseModel as BaseModel
 import pathlib
 
 
-class BaseModelTests(unittest.TestCase):
+class BaseModel_Test(unittest.TestCase):
     """
     Class BaseModelTests that provides unit testing for the
     `BaseModel` class.
