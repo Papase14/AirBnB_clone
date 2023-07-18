@@ -1,44 +1,60 @@
-#!/usr/bin/python3
-"""test_place unit test for Place class"""
-
+"""unit test for console"""
 import unittest
-from io import StringIO
-from unittest.mock import patch
+import pep8
 from console import HBNBCommand
+from unittest.mock import patch
+from io import StringIO
 
 
-class ConsoleTestCase(unittest.TestCase):
-    def setUp(self):
-        self.console = HBNBCommand()
+class TestConsole(unittest.TestCase):
+    """
+    Test the console
+    """
 
-    def tearDown(self):
-        pass
+    def test_pep8_console(self):
+        """
+        Test that models/console.py conforms to PEP8
+        """
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['console.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
 
-    def test_quit_command(self):
+    def test_count(self):
+        """
+        Test count
+        """
         with patch('sys.stdout', new=StringIO()) as f:
-            self.assertTrue(self.console.onecmd("quit"))
+            HBNBCommand().onecmd("help count")
+        self.assertEqual("Prints the number of instances of a class\n",
+                         f.getvalue())
 
-    def test_help_command(self):
+    def test_show(self):
+        """
+        Test show
+        """
         with patch('sys.stdout', new=StringIO()) as f:
-            self.assertTrue(self.console.onecmd("help"))
+            HBNBCommand().onecmd("help show")
+        self.assertEqual("Prints the string representation of an instance\n",
+                         f.getvalue())
 
-    def test_create_command(self):
+    def test_destroy(self):
+        """
+        Test destroy
+        """
         with patch('sys.stdout', new=StringIO()) as f:
-            self.assertFalse(self.console.onecmd("create"))
-            self.assertFalse(self.console.onecmd("create SomeInvalidClassName"))
+            HBNBCommand().onecmd("help destroy")
+        self.assertEqual("Deletes an instance based on the class name and id\n",
+                         f.getvalue())
 
-    def test_show_command(self):
+    def test_update(self):
+        """
+        Test update
+        """
         with patch('sys.stdout', new=StringIO()) as f:
-            self.assertFalse(self.console.onecmd("show"))
-            self.assertFalse(self.console.onecmd("show SomeInvalidClassName"))
-            self.assertFalse(self.console.onecmd("show BaseModel"))
-
-    def test_destroy_command(self):
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.assertFalse(self.console.onecmd("destroy"))
-            self.assertFalse(self.console.onecmd("destroy SomeInvalidClassName"))
-            self.assertFalse(self.console.onecmd("destroy BaseModel"))
-
+            HBNBCommand().onecmd("help update")
+        self.assertEqual("Updates an instance based on the class name and id\n",
+                         f.getvalue())
 
 if __name__ == '__main__':
     unittest.main()
