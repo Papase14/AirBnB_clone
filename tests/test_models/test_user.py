@@ -42,7 +42,7 @@ class User_test(unittest.TestCase):
         self.user3.last_name = "Zimu"
         user_info = {
             "email": "StuPat@outlook.com",
-            "password": "P@ssw0rd",
+            "password": "1234",
             "first_name": "Morake",
             "last_name": "Zimu"
         }
