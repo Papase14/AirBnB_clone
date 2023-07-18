@@ -33,8 +33,14 @@ class HBNBCommand(cmd.Cmd):
             Exit on quit
         """
         return True
+    
+    def help_quit(self):
+        """
+        Help documentation for quit command.
+        """
+        print("Quit command to exit the program")
 
-    def emptyarg(self):
+    def emptyline(self):
         """
             Overwrite default behavior to repeat last cmd
         """
@@ -205,5 +211,4 @@ def parse(arg):
     return tuple(arg.split())
 
 if __name__ == "__main__":
-    storage.reload()
     HBNBCommand().cmdloop()
