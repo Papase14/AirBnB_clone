@@ -19,8 +19,15 @@ class HBNBCommand(cmd.Cmd):
         Entry to command interpreter
     """
     prompt = "(hbnb) "
-    classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+    classes = {
+        "Amenity": Amenity,
+        "BaseModel": BaseModel,
+        "City": City,
+        "Place": Place,
+        "Review": Review,
+        "State": State,
+        "User": User
+    }
 
     def do_EOF(self, arg):
         """
@@ -34,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
             Exit on quit
         """
         return True
-    
+
     def help_quit(self):
         """
         Help documentation for quit command.
@@ -210,6 +217,7 @@ def parse(arg):
         Helper method to parse user typed input
     """
     return tuple(arg.split())
+
 
 if __name__ == "__main__":
     storage.reload()
