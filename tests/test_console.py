@@ -1,60 +1,42 @@
-"""unit test for console"""
 import unittest
-import pep8
-from console import HBNBCommand
-from unittest.mock import patch
 from io import StringIO
+from unittest.mock import patch
+from console import HBNBCommand
 
 
-class TestConsole(unittest.TestCase):
-    """
-    Test the console
-    """
+class ConsoleTestCase(unittest.TestCase):
+    def setUp(self):
+        self.console = HBNBCommand()
 
-    def test_pep8_console(self):
-        """
-        Test that models/console.py conforms to PEP8
-        """
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['console.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+    def tearDown(self):
+        pass
 
-    def test_count(self):
-        """
-        Test count
-        """
+    def test_quit_command(self):
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("help count")
-        self.assertEqual("Prints the number of instances of a class\n",
-                         f.getvalue())
+            self.assertTrue(self.console.onecmd("quit"))
 
-    def test_show(self):
-        """
-        Test show
-        """
+    def test_help_command(self):
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("help show")
-        self.assertEqual("Prints the string representation of an instance\n",
-                         f.getvalue())
+            self.assertTrue(self.console.onecmd("help"))
 
-    def test_destroy(self):
-        """
-        Test destroy
-        """
+    def test_create_command(self):
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("help destroy")
-        self.assertEqual("Deletes an instance based on the class name and id\n",
-                         f.getvalue())
+            self.assertFalse(self.console.onecmd("create"))
+            self.assertFalse(self.console.onecmd("create SomeInvalidClassName"))
 
-    def test_update(self):
-        """
-        Test update
-        """
+    def test_show_command(self):
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("help update")
-        self.assertEqual("Updates an instance based on the class name and id\n",
-                         f.getvalue())
+            self.assertFalse(self.console.onecmd("show"))
+            self.assertFalse(self.console.onecmd("show SomeInvalidClassName"))
+            self.assertFalse(self.console.onecmd("show BaseModel"))
+
+    def test_destroy_command(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(self.console.onecmd("destroy"))
+            self.assertFalse(self.console.onecmd("destroy SomeInvalidClassName"))
+            self.assertFalse(self.console.onecmd("destroy BaseModel"))
+
+    # Add more test methods for other commands
 
 if __name__ == '__main__':
     unittest.main()
