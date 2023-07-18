@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+"""test_place unit test for Place class"""
+
 import unittest
 from io import StringIO
 from unittest.mock import patch
@@ -36,7 +39,6 @@ class ConsoleTestCase(unittest.TestCase):
             self.assertFalse(self.console.onecmd("destroy SomeInvalidClassName"))
             self.assertFalse(self.console.onecmd("destroy BaseModel"))
 
-    # Add more test methods for other commands
 
 if __name__ == '__main__':
     unittest.main()
