@@ -211,4 +211,5 @@ def parse(arg):
     return tuple(arg.split())
 
 if __name__ == "__main__":
+    storage.reload()
     HBNBCommand().cmdloop()
