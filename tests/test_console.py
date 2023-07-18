@@ -44,8 +44,7 @@ class TestConsole(unittest.TestCase):
         """
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help destroy")
-        self.assertEqual("Deletes an instance based on the class name and id\n",
-                         f.getvalue())
+        self.assertEqual("Deletes based on class name and id", f.getvalue())
 
     def test_update(self):
         """
@@ -53,8 +52,8 @@ class TestConsole(unittest.TestCase):
         """
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help update")
-        self.assertEqual("Updates an instance based on the class name and id\n",
-                         f.getvalue())
+        self.assertEqual("Updates based on class name and id", f.getvalue())
+
 
 if __name__ == '__main__':
     unittest.main()
