@@ -16,8 +16,9 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """
-        Entry to command interpreter
+    Entry to command interpreter
     """
+
     prompt = "(hbnb) "
     classes = {
         "Amenity": Amenity,
@@ -26,19 +27,19 @@ class HBNBCommand(cmd.Cmd):
         "Place": Place,
         "Review": Review,
         "State": State,
-        "User": User
+        "User": User,
     }
 
     def do_EOF(self, arg):
         """
-            Exit on Ctrl-D
+        Exit on Ctrl-D
         """
         print()
         return True
 
     def do_quit(self, arg):
         """
-            Exit on quit
+        Exit on quit
         """
         return True
 
@@ -50,13 +51,13 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         """
-            Overwrite default behavior to repeat last cmd
+        Overwrite default behavior to repeat last cmd
         """
         pass
 
     def do_create(self, arg):
         """
-            Create instance specified by user
+        Create instance specified by user
         """
         if len(arg) == 0:
             print("** class name missing **")
@@ -69,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """
-            Print string representation: name and id
+        Print string representation: name and id
         """
         if len(arg) == 0:
             print("** class name missing **")
@@ -90,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """
-            Destroy instance specified by user; Save changes to JSON file
+        Destroy instance specified by user; Save changes to JSON file
         """
         if len(arg) == 0:
             print("** class name missing **")
@@ -112,7 +113,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-            Print all objects or all objects of specified class
+        Print all objects or all objects of specified class
         """
         if not arg:
             print([str(value) for value in storage.all().values()])
@@ -126,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """
-            Update if given exact object, exact attribute
+        Update if given exact object, exact attribute
         """
         args = parse(arg)
         if len(args) >= 4:
@@ -152,7 +153,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, arg):
         """
-            Display count of instances specified
+        Display count of instances specified
         """
         if arg in HBNBCommand.classes:
             count = 0
@@ -165,46 +166,46 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, arg):
         """
-            Accepts class name followed by arguement
+        Accepts class name followed by arguement
         """
-        args = arg.split('.')
+        args = arg.split(".")
         class_arg = args[0]
         if len(args) == 1:
             print("*** Unknown syntax: {}".format(arg))
             return
         try:
-            args = args[1].split('(')
+            args = args[1].split("(")
             command = args[0]
-            if command == 'all':
+            if command == "all":
                 HBNBCommand.do_all(self, class_arg)
-            elif command == 'count':
+            elif command == "count":
                 HBNBCommand.do_count(self, class_arg)
-            elif command == 'show':
-                args = args[1].split(')')
+            elif command == "show":
+                args = args[1].split(")")
                 id_arg = args[0]
                 id_arg = id_arg.strip("'")
                 id_arg = id_arg.strip('"')
-                arg = class_arg + ' ' + id_arg
+                arg = class_arg + " " + id_arg
                 HBNBCommand.do_show(self, arg)
-            elif command == 'destroy':
-                args = args[1].split(')')
+            elif command == "destroy":
+                args = args[1].split(")")
                 id_arg = args[0]
                 id_arg = id_arg.strip('"')
                 id_arg = id_arg.strip("'")
-                arg = class_arg + ' ' + id_arg
+                arg = class_arg + " " + id_arg
                 HBNBCommand.do_destroy(self, arg)
-            elif command == 'update':
-                args = args[1].split(',')
+            elif command == "update":
+                args = args[1].split(",")
                 id_arg = args[0].strip("'")
                 id_arg = id_arg.strip('"')
-                name_arg = args[1].strip(',')
+                name_arg = args[1].strip(",")
                 val_arg = args[2]
-                name_arg = name_arg.strip(' ')
+                name_arg = name_arg.strip(" ")
                 name_arg = name_arg.strip("'")
                 name_arg = name_arg.strip('"')
-                val_arg = val_arg.strip(' ')
-                val_arg = val_arg.strip(')')
-                arg = class_arg + ' ' + id_arg + ' ' + name_arg + ' ' + val_arg
+                val_arg = val_arg.strip(" ")
+                val_arg = val_arg.strip(")")
+                arg = class_arg + " " + id_arg + " " + name_arg + " " + val_arg
                 HBNBCommand.do_update(self, arg)
             else:
                 print("*** Unknown syntax: {}".format(arg))
@@ -214,7 +215,7 @@ class HBNBCommand(cmd.Cmd):
 
 def parse(arg):
     """
-        Helper method to parse user typed input
+    Helper method to parse user typed input
     """
     return tuple(arg.split())
 
